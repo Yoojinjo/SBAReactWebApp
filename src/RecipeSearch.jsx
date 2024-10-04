@@ -31,7 +31,9 @@ function RecipeSearch() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		searchRecipes();
+		if (ingredients) {
+			searchRecipes();
+		}
 	};
 
 	return (
