@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import "./App.css";
 
 function RecipeSearch() {
 	const [ingredients, setIngredients] = useState("");
@@ -50,14 +51,15 @@ function RecipeSearch() {
 			</form>
 
 			<h2>Recipes:</h2>
-			<ul>
+
+			<div className="recipe-cards">
 				{recipes.map((recipe) => (
-					<li key={recipe.id}>
+					<div className="recipe-card" key={recipe.id}>
 						<h3>{recipe.title}</h3>
 						<img src={recipe.image} alt={recipe.title} />
 						{/* <p>I have: {recipe.usedIngredients[0].originalName}</p> */}
 						{/* Map used ingredients */}
-						<p>I have:</p>
+						<h5>I have:</h5>
 						<ul>
 							{recipe.usedIngredients.map((ingredient) => (
 								<li key={ingredient.id}>
@@ -70,7 +72,7 @@ function RecipeSearch() {
 							I need: {recipe.missedIngredients[0].originalName}
 						</p> */}
 						{/* Map missed ingredients */}
-						<p>I need:</p>
+						<h5>I also need:</h5>
 						<ul>
 							{recipe.missedIngredients.map((ingredient) => (
 								<li key={ingredient.id}>
@@ -78,9 +80,9 @@ function RecipeSearch() {
 								</li>
 							))}
 						</ul>
-					</li>
+					</div>
 				))}
-			</ul>
+			</div>
 		</div>
 	);
 }
