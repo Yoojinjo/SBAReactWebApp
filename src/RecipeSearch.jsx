@@ -4,7 +4,7 @@ import axios from "axios";
 function RecipeSearch() {
 	const [ingredients, setIngredients] = useState("");
 	const [recipes, setRecipes] = useState([]);
-	const apiKey = "Placeholder for Spoonacular API";
+	const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
 
 	const searchRecipes = async () => {
 		try {
@@ -19,13 +19,15 @@ function RecipeSearch() {
 				}
 			);
 			setRecipes(response.data);
+			console.log(response.data);
 		} catch (e) {
-			error.log(e);
+			console.error(e);
 		}
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		searchRecipes();
 	};
 
 	return (
