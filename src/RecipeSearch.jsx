@@ -38,7 +38,7 @@ function RecipeSearch() {
 
 	return (
 		<div>
-			<h1>Search Recipes by Ingredients</h1>
+			<h1>What can I make for dinner if I have...</h1>
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
@@ -48,6 +48,39 @@ function RecipeSearch() {
 				/>
 				<button type="submit">Search</button>
 			</form>
+
+			<h2>Recipes:</h2>
+			<ul>
+				{recipes.map((recipe) => (
+					<li key={recipe.id}>
+						<h3>{recipe.title}</h3>
+						<img src={recipe.image} alt={recipe.title} />
+						{/* <p>I have: {recipe.usedIngredients[0].originalName}</p> */}
+						{/* Map used ingredients */}
+						<p>I have:</p>
+						<ul>
+							{recipe.usedIngredients.map((ingredient) => (
+								<li key={ingredient.id}>
+									{ingredient.originalName}
+								</li>
+							))}
+						</ul>
+
+						{/* <p>
+							I need: {recipe.missedIngredients[0].originalName}
+						</p> */}
+						{/* Map missed ingredients */}
+						<p>I need:</p>
+						<ul>
+							{recipe.missedIngredients.map((ingredient) => (
+								<li key={ingredient.id}>
+									{ingredient.originalName}
+								</li>
+							))}
+						</ul>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 }
