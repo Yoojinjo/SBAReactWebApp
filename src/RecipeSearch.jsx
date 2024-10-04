@@ -87,3 +87,9 @@ function RecipeSearch() {
 	);
 }
 export default RecipeSearch;
+
+// features to add next
+// Display the recipe instructions when a card is clicked.
+// Add a state for the selected recipe id.
+// Create a function to fetch recipe details.
+// redirect to source url?
