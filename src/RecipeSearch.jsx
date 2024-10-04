@@ -4,7 +4,7 @@ import axios from "axios";
 function RecipeSearch() {
 	const [ingredients, setIngredients] = useState("");
 	const [recipes, setRecipes] = useState([]);
-	const apiKey = process.env.REACT_APP_SPOONACULAR_API_KEY;
+	const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
 	const searchRecipes = async () => {
 		try {
@@ -12,7 +12,11 @@ function RecipeSearch() {
 				`https://api.spoonacular.com/recipes/findByIngredients`,
 				{
 					params: {
-						ingredients, // Ingredients to search for
+						//ingredients need to be a comma separated string
+						ingredients: ingredients
+							.split(",")
+							.map((ingredient) => ingredient.trim())
+							.join(","),
 						number: 3, // Limit the number of results
 						apiKey: apiKey,
 					},
@@ -36,7 +40,7 @@ function RecipeSearch() {
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
-					placeholder="Enter ingredients, e.g. apples, flour, sugar"
+					placeholder="apples, flour, sugar"
 					value={ingredients}
 					onChange={(e) => setIngredients(e.target.value)}
 				/>
