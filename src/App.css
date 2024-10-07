@@ -1,48 +1,97 @@
+/* App.css */
+
+/* Root container styles */
 #root {
 	max-width: 1280px;
 	margin: 0 auto;
 	padding: 2rem;
 	text-align: center;
 }
-
+.cards-container {
+	display: flex; /* Enable flexbox */
+	flex-direction: row; /* Align items in a row (horizontally) */
+	flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+	justify-content: flex-start; /* Align items to the start of the container */
+	gap: 20px; /* Space between recipe cards */
+}
+/* Unordered lists */
 ul {
-	list-style-type: none; /* Remove bullet points from unordered lists */
+	list-style-type: none; /* Remove bullet points */
 	padding: 0; /* Remove default padding */
 	margin: 0; /* Remove default margin */
 }
 
-.recipe-cards {
+/* Flexbox container for recipe search */
+.recipe-search-container {
 	display: flex;
-	flex-wrap: wrap; /* Allow cards to wrap to the next line */
-	gap: 16px; /* Space between cards */
-	justify-content: center; /* Center the cards */
+	flex-direction: column;
+	align-items: center; /* Center the header and form */
 }
 
+/* Flexbox for summary and recipes */
+.summary-and-recipes {
+	display: flex; /* Use flexbox to position summary and recipes */
+	width: 100%;
+}
+
+/* Recipe summary */
+.recipe-summary {
+	flex: 1; /* Takes 1 part of the available space */
+	padding: 20px;
+	border-right: 2px solid #ccc; /* Optional: a border to separate sections */
+}
+
+/* Recipe cards container */
+.recipe-collection {
+	flex: 2; /* Takes 2 parts of the available space */
+	display: flex;
+	flex-direction: column; /* Change direction to column for vertical stacking */
+	flex-wrap: nowrap; /* Prevent wrapping, keeping cards stacked vertically */
+	gap: 20px; /* Space between recipe cards */
+	align-items: flex-start; /* Align items to the start */
+}
+/* Center the Recipes heading */
+.recipe-collection h2 {
+	text-align: center; /* Center the text of the h2 */
+	width: 100%; /* Ensure it takes full width for proper centering */
+}
+
+/* Individual recipe card styles */
 .recipe-card {
+	width: calc(33% - 20px); /* Responsive width for 3 cards in a row */
 	border: 1px solid #ccc; /* Card border */
 	border-radius: 8px; /* Rounded corners */
 	padding: 16px; /* Inner padding */
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-	width: 200px; /* Fixed width for the card */
 	text-align: center; /* Center text */
 	background-color: #fff; /* Card background color */
 }
 
+/* Recipe card image styles */
 .recipe-card img {
 	width: 100%; /* Responsive image */
 	border-radius: 4px; /* Slightly rounded image corners */
 }
 
+/* Title styling */
 .recipe-card h3 {
 	font-size: 1.2em; /* Title font size */
 	margin: 10px 0; /* Margin around title */
 }
 
+/* Paragraph margin */
 .recipe-card p {
 	margin: 5px 0; /* Margin around paragraphs */
 }
 
-.recipe-card ul {
-	list-style-type: none; /* Remove bullet points */
-	padding: 0; /* Remove padding */
+/* Heading margins */
+h1,
+h2,
+h3 {
+	margin: 10px 0;
+}
+
+/* Button margin */
+button {
+	margin-top: 10px;
 }
