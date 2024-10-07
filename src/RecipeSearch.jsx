@@ -69,6 +69,7 @@ function RecipeSearch() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setSelectedRecipe(null); // Clear the selected recipe summary
 		if (ingredients) {
 			searchRecipes();
 		}
@@ -121,7 +122,7 @@ function RecipeSearch() {
 				)}
 
 				<div className="recipe-collection">
-					<h2>Recipes:</h2> 
+					<h2>Recipes:</h2>
 					<div className="cards-container">
 						{recipes.map((recipe) => (
 							<div className="recipe-card" key={recipe.id}>
