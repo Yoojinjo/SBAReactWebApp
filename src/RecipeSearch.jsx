@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import RecipeCard from "./RecipeCard";
 import "./App.css";
 
 function RecipeSearch() {
@@ -125,42 +126,12 @@ function RecipeSearch() {
 					<h2>Recipes:</h2>
 					<div className="cards-container">
 						{recipes.map((recipe) => (
-							<div className="recipe-card" key={recipe.id}>
-								<h3>{recipe.title}</h3>
-								<img src={recipe.image} alt={recipe.title} />
-								<h5>I have:</h5>
-								<ul>
-									{recipe.usedIngredients.map(
-										(ingredient) => (
-											<li key={ingredient.id}>
-												{ingredient.originalName}
-											</li>
-										)
-									)}
-								</ul>
-
-								<h5>I also need:</h5>
-								<ul>
-									{recipe.missedIngredients.map(
-										(ingredient) => (
-											<li key={ingredient.id}>
-												{ingredient.originalName}
-											</li>
-										)
-									)}
-								</ul>
-
-								<button
-									onClick={() => getRecipeSummary(recipe.id)}
-								>
-									View Recipe Summary
-								</button>
-								<button
-									onClick={() => getRecipeDetails(recipe.id)}
-								>
-									View Recipe
-								</button>
-							</div>
+							<RecipeCard
+								key={recipe.id}
+								recipe={recipe}
+								onViewSummary={getRecipeSummary}
+								onViewRecipe={getRecipeDetails}
+							/>
 						))}
 					</div>
 				</div>
