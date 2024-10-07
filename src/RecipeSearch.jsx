@@ -18,13 +18,35 @@ function RecipeSearch() {
 							.split(",")
 							.map((ingredient) => ingredient.trim())
 							.join(","),
-						number: 9, // Limit the number of results
+						number: 3, // Limit the number of results
 						apiKey: apiKey,
 					},
 				}
 			);
 			setRecipes(response.data);
 			console.log(response.data);
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
+	// Function to get recipe details and redirect to the source URL
+	const getRecipeDetails = async (recipeId) => {
+		try {
+			const response = await axios.get(
+				`https://api.spoonacular.com/recipes/${recipeId}/information`,
+				{
+					params: {
+						apiKey: apiKey,
+					},
+				}
+			);
+			console.log(response);
+			// // Redirect to the recipe's source URL
+			// window.location.href = response.data.sourceUrl;
+
+			// Open the recipe's source URL in a new tab
+			window.open(response.data.sourceUrl, "_blank");
 		} catch (e) {
 			console.error(e);
 		}
@@ -80,6 +102,10 @@ function RecipeSearch() {
 								</li>
 							))}
 						</ul>
+						{/* Button to view the recipe */}
+						<button onClick={() => getRecipeDetails(recipe.id)}>
+							View Recipe
+						</button>
 					</div>
 				))}
 			</div>
