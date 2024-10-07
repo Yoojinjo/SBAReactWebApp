@@ -18,7 +18,7 @@ function RecipeSearch() {
 							.split(",")
 							.map((ingredient) => ingredient.trim())
 							.join(","),
-						number: 3, // Limit the number of results
+						number: 9, // Limit the number of results
 						apiKey: apiKey,
 					},
 				}

@@ -1,9 +1,8 @@
-# React + Vite
+This is a recipe web page using spoonacular API.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This intended function is that users will enter ingredients that they have available, and the api will return recipes that fit the ingredients listed along with any additional ingredients they may need to complete the dish.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# SBAReactWebApp
+Current problems
+web app is deployed https://shimmering-fenglisu-6b303f.netlify.app/
+However, I got stuck trying to enable the API, without hardcoding it, as it would be exposed on github. Website is functional, but due to lack of time, Web app lacks the features I wanted to add, such as save favorites.
+Also currently only returns ingredients. Not the recipe instructions on how to use the ingredients.
