@@ -29,6 +29,7 @@ ul {
 	text-align: center;
 	margin: 20px 0;
 	align-items: center; /* Center the header and form */
+	justify-content: space-between;
 }
 /* Centering the H1 heading */
 .recipe-search-container h1 {
@@ -139,4 +140,29 @@ button:hover {
 	.recipe-card {
 		flex: 1 1 100%; /* One card per row on very small screens */
 	}
+}
+
+.main-content {
+	flex: 1; /* Take up the remaining width */
+	padding-right: 20px; /* Give some space between content and sidebar */
+}
+.sidebar {
+	width: 200px;
+
+	padding: 10px;
+	border-left: 1px solid #ddd;
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100%;
+	overflow-y: auto;
+}
+.sidebar a {
+	text-decoration: none;
+	color: #333;
+}
+
+.sidebar a:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }

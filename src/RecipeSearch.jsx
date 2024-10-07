@@ -9,6 +9,7 @@ function RecipeSearch() {
 	const [recipes, setRecipes] = useState([]);
 	const [selectedRecipe, setSelectedRecipe] = useState(null); // State for the selected recipe summary
 	const [favorites, setFavorites] = useState([]);
+	const [showFavorites, setShowFavorites] = useState(false);
 	const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
 	useEffect(() => {
@@ -100,38 +101,58 @@ function RecipeSearch() {
 
 	return (
 		<div className="recipe-search-container">
-			<h1>What can I make for dinner if I have...</h1>
-			<form onSubmit={handleSubmit}>
-				<p>enter ingredients separated by commas</p>
-				<input
-					type="text"
-					placeholder="apples, flour, sugar"
-					value={ingredients}
-					onChange={(e) => setIngredients(e.target.value)}
-				/>
-				<button type="submit">Search</button>
-			</form>
+			{/* Main Content */}
+			<div className="main-content">
+				<h1>What can I make for dinner if I have...</h1>
+				<form onSubmit={handleSubmit}>
+					<p>enter ingredients separated by commas</p>
+					<input
+						type="text"
+						placeholder="apples, flour, sugar"
+						value={ingredients}
+						onChange={(e) => setIngredients(e.target.value)}
+					/>
+					<button type="submit">Search</button>
+				</form>
+				<div className="summary-and-recipes">
+					{/* Section to show the selected recipe summary */}
+					{selectedRecipe && (
+						<RecipeSummary recipe={selectedRecipe} />
+					)}
 
-			<div className="summary-and-recipes">
-				{/* Section to show the selected recipe summary */}
-				{selectedRecipe && <RecipeSummary recipe={selectedRecipe} />}
-
-				<div className="recipe-collection">
-					<h2>Recipes:</h2>
-					<div className="cards-container">
-						{recipes.map((recipe) => (
-							<RecipeCard
-								key={recipe.id}
-								recipe={recipe}
-								onViewSummary={getRecipeSummary}
-								onViewRecipe={getRecipeDetails}
-								onToggleFavorite={toggleFavorite}
-								isFavorite={favorites.some(
-									(fav) => fav.id === recipe.id // Check if a favorite
-								)}
-							/>
-						))}
+					<div className="recipe-collection">
+						<h2>Recipes:</h2>
+						<div className="cards-container">
+							{recipes.map((recipe) => (
+								<RecipeCard
+									key={recipe.id}
+									recipe={recipe}
+									onViewSummary={getRecipeSummary}
+									onViewRecipe={getRecipeDetails}
+									onToggleFavorite={toggleFavorite}
+									isFavorite={favorites.some(
+										(fav) => fav.id === recipe.id // Check if a favorite
+									)}
+								/>
+							))}
+						</div>
 					</div>
+				</div>
+				<div className="sidebar">
+					<h2>Favorite Recipes</h2>
+					<ul>
+						{favorites.map((fav) => (
+							<li key={fav.id}>
+								<a
+									href={fav.sourceUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{fav.title}
+								</a>
+							</li>
+						))}
+					</ul>
 				</div>
 			</div>
 		</div>
