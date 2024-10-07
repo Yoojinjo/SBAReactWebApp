@@ -1,3 +1,11 @@
+body {
+	font-family: "Arial", sans-serif; /* Base font family */
+	font-size: 16px; /* Base font size */
+	line-height: 1.6; /* Improve line spacing */
+	color: #333; /* Dark gray for better readability */
+	background-color: #f5e291; /* Light background for the whole app */
+}
+
 .cards-container {
 	display: flex; /* Enable flexbox */
 	flex-direction: row; /* Align items in a row (horizontally) */
@@ -48,7 +56,7 @@ ul {
 	flex-direction: column; /* Change direction to column for vertical stacking */
 	flex-wrap: wrap;
 	gap: 20px; /* Space between recipe cards */
-	align-items: flex-start; /* Align items to the start */
+	align-items: stretch;
 }
 /* Center the Recipes heading */
 .recipe-collection h2 {
@@ -58,14 +66,15 @@ ul {
 
 /* Individual recipe card styles */
 .recipe-card {
-	width: calc(25% - 20px); /* Responsive width for 4 cards in a row */
+	flex: 1 1 28%; /* Allow cards to grow and shrink with a base width */
 	min-width: 150px;
+	max-width: 300px;
 	border: 1px solid #ccc; /* Card border */
-	border-radius: 8px; /* Rounded corners */
-	padding: 16px; /* Inner padding */
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+	border-radius: 8px;
+	padding: 16px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	text-align: center; /* Center text */
-	background-color: #fff; /* Card background color */
+	background-color: #ffe96c; /* Card background color */
 }
 
 /* Recipe card image styles */
@@ -89,10 +98,38 @@ ul {
 h1,
 h2,
 h3 {
+	font-family: "Georgia", serif; /* Serif font for headings */
+	font-weight: bold; /* Ensure headings stand out */
 	margin: 10px 0;
 }
 
-/* Button margin */
+/* Button styling */
 button {
-	margin-top: 10px;
+	background-color: #4090e6; /* Primary background color */
+	margin-top: 1%;
+	color: #fff; /* Text color */
+	border: none; /* Remove default border */
+	border-radius: 4px; /* Rounded corners */
+	padding: 10px 20px; /* Vertical and horizontal padding */
+	font-size: 1em; /* Font size */
+	cursor: pointer; /* Pointer cursor on hover */
+	transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and scaling */
+}
+
+/* Hover effect */
+button:hover {
+	background-color: #0056b3; /* Darker shade for hover */
+	transform: scale(1.05); /* Slightly scale up on hover */
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+	.recipe-card {
+		flex: 1 1 calc(50% - 20px); /* Adjust to two cards per row on smaller screens */
+	}
+}
+
+@media (max-width: 480px) {
+	.recipe-card {
+		flex: 1 1 100%; /* One card per row on very small screens */
+	}
 }
