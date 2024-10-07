@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
+import RecipeSummary from "./RecipeSummary";
 import "./App.css";
 
 function RecipeSearch() {
@@ -54,7 +55,6 @@ function RecipeSearch() {
 	// Function to get recipe summary
 	const getRecipeSummary = async (recipeId) => {
 		const recipeDetails = await fetchRecipeDetails(recipeId);
-
 		if (recipeDetails) {
 			setSelectedRecipe(recipeDetails); // Update selected recipe state
 		}
@@ -91,36 +91,7 @@ function RecipeSearch() {
 
 			<div className="summary-and-recipes">
 				{/* Section to show the selected recipe summary */}
-				{selectedRecipe && (
-					<div className="recipe-summary">
-						<h2>{selectedRecipe.title}</h2>
-						<img
-							src={selectedRecipe.image}
-							alt={selectedRecipe.title}
-						/>
-						<p>
-							<strong>Summary:</strong>{" "}
-							{selectedRecipe.summary.replace(/<[^>]*>?/gm, "")}
-						</p>
-						<p>
-							<strong>Servings:</strong> {selectedRecipe.servings}
-						</p>
-						<p>
-							<strong>Ready in:</strong>{" "}
-							{selectedRecipe.readyInMinutes} minutes
-						</p>
-						<p>
-							<strong>Source:</strong>{" "}
-							<a
-								href={selectedRecipe.sourceUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								Click here for full recipe
-							</a>
-						</p>
-					</div>
-				)}
+				{selectedRecipe && <RecipeSummary recipe={selectedRecipe} />}
 
 				<div className="recipe-collection">
 					<h2>Recipes:</h2>
