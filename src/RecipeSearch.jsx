@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 import RecipeSummary from "./RecipeSummary";
@@ -10,15 +10,25 @@ function RecipeSearch() {
 	const [selectedRecipe, setSelectedRecipe] = useState(null); // State for the selected recipe summary
 	const [favorites, setFavorites] = useState([]);
 	const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
+
+	useEffect(() => {
+		const savedFavorites = localStorage.getItem("favorites");
+		if (savedFavorites) {
+			setFavorites(JSON.parse(savedFavorites));
+		}
+	}, []);
+
 	const toggleFavorite = (recipe) => {
 		setFavorites((prevFavorites) => {
-			if (prevFavorites.find((fav) => fav.id === recipe.id)) {
-				// If the recipe is already in favorites, remove it
-				return prevFavorites.filter((fav) => fav.id !== recipe.id);
-			} else {
-				// If it's not in favorites, add it
-				return [...prevFavorites, recipe];
-			}
+			const updatedFavorites = prevFavorites.find(
+				(fav) => fav.id === recipe.id
+			)
+				? prevFavorites.filter((fav) => fav.id !== recipe.id) //remove
+				: [...prevFavorites, recipe]; // add
+
+			//save favorites to local storage
+			localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+			return updatedFavorites;
 		});
 	};
 
