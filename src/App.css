@@ -5,7 +5,7 @@ body {
 	font-size: 16px; /* Base font size */
 	line-height: 1.6; /* Improve line spacing */
 	color: #333; /* Dark gray for better readability */
-	background-color: #f5e291; /* Light background for the whole app */
+	background-color: #faedcd; /* Light background for the whole app */
 }
 
 .cards-container {
@@ -82,7 +82,7 @@ ul {
 	padding: 16px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 	text-align: center; /* Center text */
-	background-color: #ffe96c; /* Card background color */
+	background-color: #d4a373; /* Card background color */
 }
 
 /* Recipe card image styles */
@@ -113,7 +113,7 @@ h3 {
 
 /* Button styling */
 button {
-	background-color: #4090e6; /* Primary background color */
+	background-color: #606c38; /* Primary background color */
 	margin-top: 1%;
 	color: #fff; /* Text color */
 	border: none; /* Remove default border */
@@ -126,7 +126,7 @@ button {
 
 /* Hover effect */
 button:hover {
-	background-color: #0056b3; /* Darker shade for hover */
+	background-color: #283618; /* Darker shade for hover */
 	transform: scale(1.05); /* Slightly scale up on hover */
 }
 /* Media Queries for Responsiveness */
@@ -147,15 +147,19 @@ button:hover {
 	padding-right: 20px; /* Give some space between content and sidebar */
 }
 .sidebar {
-	width: 200px;
-
-	padding: 10px;
-	border-left: 1px solid #ddd;
 	position: fixed;
-	right: 0;
 	top: 0;
+	right: -260px; /* Hide off-screen */
+	width: 250px; /* Set width of the sidebar */
 	height: 100%;
-	overflow-y: auto;
+	background: #e3d5ca; /* Background color */
+	box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Optional shadow */
+	transition: right 0.3s ease; /* Animate the slide in/out */
+	padding: 20px;
+}
+
+.sidebar.visible {
+	right: 0; /* Slide in when visible */
 }
 .sidebar a {
 	text-decoration: none;

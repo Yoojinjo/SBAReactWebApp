@@ -32,7 +32,7 @@ const RecipeCard = ({
 			<button onClick={() => onViewRecipe(recipe.id)}>View Recipe</button>
 			<button
 				onClick={() => onToggleFavorite(recipe)}
-				style={{ backgroundColor: isFavorite ? "red" : "black" }} // Change button color
+				style={{ backgroundColor: isFavorite ? "#d8829d" : "black" }} // Change button color
 			>
 				{isFavorite ? "Favorited" : "Save to Favorites"}
 			</button>

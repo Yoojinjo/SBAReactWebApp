@@ -9,28 +9,41 @@ function RecipeSearch() {
 	const [recipes, setRecipes] = useState([]);
 	const [selectedRecipe, setSelectedRecipe] = useState(null); // State for the selected recipe summary
 	const [favorites, setFavorites] = useState([]);
-	const [showFavorites, setShowFavorites] = useState(false);
+	const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
 	const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
 	useEffect(() => {
 		const savedFavorites = localStorage.getItem("favorites");
 		if (savedFavorites) {
+			// console.log("Loaded Favorites:", JSON.parse(savedFavorites));
 			setFavorites(JSON.parse(savedFavorites));
 		}
 	}, []);
 
-	const toggleFavorite = (recipe) => {
-		setFavorites((prevFavorites) => {
-			const updatedFavorites = prevFavorites.find(
-				(fav) => fav.id === recipe.id
-			)
-				? prevFavorites.filter((fav) => fav.id !== recipe.id) //remove
-				: [...prevFavorites, recipe]; // add
+	const toggleFavorite = async (recipe) => {
+		// Ensure we get the complete recipe details, including sourceUrl
+		const recipeDetails = await fetchRecipeDetails(recipe.id);
 
-			//save favorites to local storage
-			localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-			return updatedFavorites;
-		});
+		if (recipeDetails) {
+			setFavorites((prevFavorites) => {
+				const updatedFavorites = prevFavorites.find(
+					(fav) => fav.id === recipe.id
+				)
+					? prevFavorites.filter((fav) => fav.id !== recipe.id) // Remove if already a favorite
+					: [...prevFavorites, recipeDetails]; // Add full recipe details
+
+				// Save updated favorites to local storage
+				localStorage.setItem(
+					"favorites",
+					JSON.stringify(updatedFavorites)
+				);
+				return updatedFavorites;
+			});
+		}
+	};
+	const toggleSidebar = () => {
+		setIsSidebarVisible((prev) => !prev);
 	};
 
 	const searchRecipes = async () => {
@@ -104,6 +117,16 @@ function RecipeSearch() {
 			{/* Main Content */}
 			<div className="main-content">
 				<h1>What can I make for dinner if I have...</h1>
+				<button
+					onClick={toggleSidebar}
+					style={{
+						backgroundColor: isSidebarVisible
+							? "#FA8096"
+							: "#E62D68",
+					}}
+				>
+					{isSidebarVisible ? "Hide Favorites" : "Show Favorites"}
+				</button>
 				<form onSubmit={handleSubmit}>
 					<p>enter ingredients separated by commas</p>
 					<input
@@ -138,20 +161,23 @@ function RecipeSearch() {
 						</div>
 					</div>
 				</div>
-				<div className="sidebar">
+				<div className={`sidebar ${isSidebarVisible ? "visible" : ""}`}>
 					<h2>Favorite Recipes</h2>
 					<ul>
-						{favorites.map((fav) => (
-							<li key={fav.id}>
-								<a
-									href={fav.sourceUrl}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{fav.title}
-								</a>
-							</li>
-						))}
+						{favorites.map((fav) => {
+							// console.log(fav.sourceUrl);
+							return (
+								<li key={fav.id}>
+									<a
+										href={fav.sourceUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										{fav.title}
+									</a>
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			</div>
