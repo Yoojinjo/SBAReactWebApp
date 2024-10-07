@@ -1,4 +1,6 @@
 body {
+	display: flex;
+	justify-content: center;
 	font-family: "Arial", sans-serif; /* Base font family */
 	font-size: 16px; /* Base font size */
 	line-height: 1.6; /* Improve line spacing */
@@ -7,7 +9,7 @@ body {
 }
 
 .cards-container {
-	display: flex; /* Enable flexbox */
+	display: flex;
 	flex-direction: row; /* Align items in a row (horizontally) */
 	flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
 	justify-content: flex-start; /* Align items to the start of the container */
@@ -24,9 +26,14 @@ ul {
 .recipe-search-container {
 	display: flex;
 	flex-direction: column;
+	text-align: center;
+	margin: 20px 0;
 	align-items: center; /* Center the header and form */
 }
-
+/* Centering the H1 heading */
+.recipe-search-container h1 {
+	margin: 0; /* Remove default margin */
+}
 /* Flexbox for summary and recipes */
 .summary-and-recipes {
 	display: flex; /* Use flexbox to position summary and recipes */
