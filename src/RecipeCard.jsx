@@ -1,7 +1,13 @@
 // RecipeCard.js
 import React from "react";
 
-const RecipeCard = ({ recipe, onViewSummary, onViewRecipe }) => {
+const RecipeCard = ({
+	recipe,
+	onViewSummary,
+	onViewRecipe,
+	onToggleFavorite,
+	isFavorite,
+}) => {
 	return (
 		<div className="recipe-card">
 			<h3>{recipe.title}</h3>
@@ -24,6 +30,12 @@ const RecipeCard = ({ recipe, onViewSummary, onViewRecipe }) => {
 				View Recipe Summary
 			</button>
 			<button onClick={() => onViewRecipe(recipe.id)}>View Recipe</button>
+			<button
+				onClick={() => onToggleFavorite(recipe)}
+				style={{ backgroundColor: isFavorite ? "red" : "black" }} // Change button color
+			>
+				{isFavorite ? "Favorited" : "Save to Favorites"}
+			</button>
 		</div>
 	);
 };

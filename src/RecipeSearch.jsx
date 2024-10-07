@@ -8,7 +8,19 @@ function RecipeSearch() {
 	const [ingredients, setIngredients] = useState("");
 	const [recipes, setRecipes] = useState([]);
 	const [selectedRecipe, setSelectedRecipe] = useState(null); // State for the selected recipe summary
+	const [favorites, setFavorites] = useState([]);
 	const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
+	const toggleFavorite = (recipe) => {
+		setFavorites((prevFavorites) => {
+			if (prevFavorites.find((fav) => fav.id === recipe.id)) {
+				// If the recipe is already in favorites, remove it
+				return prevFavorites.filter((fav) => fav.id !== recipe.id);
+			} else {
+				// If it's not in favorites, add it
+				return [...prevFavorites, recipe];
+			}
+		});
+	};
 
 	const searchRecipes = async () => {
 		try {
@@ -80,6 +92,7 @@ function RecipeSearch() {
 		<div className="recipe-search-container">
 			<h1>What can I make for dinner if I have...</h1>
 			<form onSubmit={handleSubmit}>
+				<p>enter ingredients separated by commas</p>
 				<input
 					type="text"
 					placeholder="apples, flour, sugar"
@@ -102,6 +115,10 @@ function RecipeSearch() {
 								recipe={recipe}
 								onViewSummary={getRecipeSummary}
 								onViewRecipe={getRecipeDetails}
+								onToggleFavorite={toggleFavorite}
+								isFavorite={favorites.some(
+									(fav) => fav.id === recipe.id // Check if a favorite
+								)}
 							/>
 						))}
 					</div>
